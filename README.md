@@ -26,7 +26,7 @@ A modern, customizable, and SwiftUI-friendly barcode scanner library for iOS, bu
 1. In Xcode, go to **File > Add Packages...**
 2. Enter the repo URL:
    ```
-   https://github.com/yourusername/BCSScanner.git
+   https://github.com/devzahirul/SwiftUICodeScanner.git
    ```
 3. Select the latest version and add the `BCSScanner` package to your app target.
 
