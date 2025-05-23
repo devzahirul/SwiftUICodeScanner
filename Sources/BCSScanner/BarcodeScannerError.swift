@@ -1,6 +1,6 @@
 import Foundation
 
-public enum BarcodeScannerError: LocalizedError {
+public enum BarcodeScannerErrorInternal: LocalizedError {
     case cameraUnavailable
     case cameraAccessDenied
     case unknown

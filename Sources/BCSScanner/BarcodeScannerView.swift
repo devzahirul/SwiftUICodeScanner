@@ -4,12 +4,11 @@ import AVFoundation
 @MainActor
 public struct BarcodeScannerView: View {
     @ObservedObject private var viewModel: BarcodeScannerViewModel
-    private let previewProvider: BarcodeScannerPreviewProvider
+    
     private let completion: (String) -> Void
 
-    public init(viewModel: BarcodeScannerViewModel, previewProvider: BarcodeScannerPreviewProvider, completion: @escaping (String) -> Void) {
+    public init(viewModel: BarcodeScannerViewModel, completion: @escaping (String) -> Void) {
         self.viewModel = viewModel
-        self.previewProvider = previewProvider
         self.completion = completion
     }
 
