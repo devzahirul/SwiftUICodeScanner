@@ -1,4 +1,4 @@
-# BCSScanner
+# BarcodeScanner
 
 A modern, customizable, and SwiftUI-friendly barcode scanner library for iOS, built with AVFoundation and async/await. Easily integrate barcode scanning into your SwiftUI apps with minimal setup and maximum flexibility.
 
@@ -72,7 +72,7 @@ struct ContentView: View {
             .buttonStyle(.borderedProminent)
         }
         .sheet(isPresented: $showScanner) {
-            BarcodeScannerView(viewModel: viewModel, previewProvider: DefaultBarcodeScannerPreview()) { code in
+            BarcodeScannerView(viewModel: viewModel) { code in
                 scannedCode = code
                 showScanner = false
             }
@@ -128,11 +128,6 @@ struct ContentView: View {
 ### `BarcodeScannerError`
 - Enum for error handling (e.g., camera permission denied, unknown error).
 - **Usage:** Used by the view model and view to display user-friendly error messages.
-
-### `DefaultBarcodeScannerPreview`
-- Default camera preview provider for SwiftUI.
-- **Usage:** Pass as the `previewProvider` to `BarcodeScannerView` for a standard camera preview.
-
 ---
 
 ## Advanced: Custom Camera Preview
@@ -151,7 +146,7 @@ struct MyCustomPreview: BarcodeScannerPreviewProvider {
 
 Then use it in your scanner view:
 ```swift
-BarcodeScannerView(viewModel: viewModel, previewProvider: MyCustomPreview()) { code in
+BarcodeScannerView(viewModel: viewModel) { code in
     // handle code
 }
 ```
