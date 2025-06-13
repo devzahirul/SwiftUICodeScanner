@@ -46,7 +46,9 @@ public class BarcodeScanner: NSObject {
     }
 
     public func startScanning() async throws -> String {
-        session.startRunning()
+        await Task.detached { [weak self] in
+            self?.session.startRunning()
+        }.value
 
         // Create a new scanning actor for this scan
         let scanningActor = ScanningActor()
@@ -57,10 +59,15 @@ public class BarcodeScanner: NSObject {
     }
 
     public func stopScanning() {
-        session.stopRunning()
-        previewLayer?.removeFromSuperlayer()
-        previewLayer = nil
-        scanningActor = nil
+        Task.detached { [weak self] in
+                   self?.session.stopRunning()
+               }
+               
+               Task { @MainActor in
+                   previewLayer?.removeFromSuperlayer()
+                   previewLayer = nil
+                   scanningActor = nil
+               }
     }
 }
 
