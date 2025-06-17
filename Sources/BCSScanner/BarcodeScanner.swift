@@ -46,9 +46,9 @@ public class BarcodeScanner: NSObject {
     }
 
     public func startScanning() async throws -> String {
-        await Task.detached { [weak self] in
-            self?.session.startRunning()
-        }.value
+         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        self?.session.startRunning()
+    }
 
         // Create a new scanning actor for this scan
         let scanningActor = ScanningActor()
@@ -59,9 +59,10 @@ public class BarcodeScanner: NSObject {
     }
 
     public func stopScanning() {
-        Task.detached { [weak self] in
-                   self?.session.stopRunning()
-               }
+        // Run session.stopRunning() on a background dispatch queue
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        self?.session.stopRunning()
+    }
                
                Task { @MainActor in
                    previewLayer?.removeFromSuperlayer()
