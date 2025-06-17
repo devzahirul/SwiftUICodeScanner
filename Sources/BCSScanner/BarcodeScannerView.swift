@@ -39,10 +39,10 @@ public struct BarcodeScannerView: View {
             }
         }
         .onAppear {
-            viewModel.session.startRunning()
+            viewModel.startScanning()
         }
         .onDisappear {
-            viewModel.session.stopRunning()
+            viewModel.stopScanning()
         }
         .onChange(of: viewModel.scannedCode) { newValue in
             if let code = newValue {
